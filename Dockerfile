@@ -1,4 +1,4 @@
-FROM jenkinsci/jnlp-slave
+FROM jenkinsci/jnlp-slave:2.32.1-alpine
 
 USER root
 
@@ -22,7 +22,7 @@ USER jenkins
 ADD helm.repo /tmp/helm.repo
 
 RUN helm init -c  \
-    && cat /tmp/helm.repo | xargs -n 2 helm repo add $1 $2 \
+    && cat /tmp/helm.repo | xargs -n 2 helm repo add \
     && helm repo update \
     && helm repo list
 
